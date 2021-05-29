@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jäsä lopputyö aaro pennanen</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+</head>
+<!---->
+<!--bodyn event attribuutti-->
+<body onkeydown = "if (event.keyCode == 13)
+document.getElementById('nappi').click()">
+    
+    <div class="yla">
+        <div id="input">
+        </div>
+        <!--napille on annettut toiminnot joita suoritetetaan painamalla nappia-->
+        <button id="nappi" onclick="
+        siirryGoogle();
+        lisaaKuva();
+        looppaaNumero();
+        Soita();
+        popUp();
+        vaihda();
+        funktio();
+        tarkistakomennot();
+        uusiks();
+        Listaa();
+        ">
+        <span>✅</span>
+        NAPPI
+        </button>
+        <div>
+        <input id="teksti" type="teksti" value="listaa">
+        </div>
+    </div>
+    <div id="vasen">
+    </div>
+    <div id="oikea">
+    </div>
+    <script src="./js/script.js"></script>
+</body>
+</html>
