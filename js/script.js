@@ -1,9 +1,3 @@
-//suorita napissa on onclick event attribuutti, jolle on annettu kaikki tehdyt toiminnot/funktiot
-//aina kun nappia painaa se suorittaa tekstin perusteella tarvittavan toiminnon
-//body elementissä on onclick event attribuutti joka suorittaa napin klikkauksen aina kun painetaan enter näppäintä.
-
-let syote = document.getElementById("teksti").value;
-
 
 document.querySelector('input').addEventListener('click', () =>{ 
 
@@ -15,13 +9,23 @@ document.addEventListener('keyup', (evt) =>{
     }
 });
 
+const vaihdateksti = (e) => {
+    let tekstaa = document.getElementById("teksti");
+    tekstaa.value = e.target.innerHTML;
+
+};
+
+//eventlistenerin funktio joka poistaa popupin
+const poista = () => {
+    let popup = document.getElementById("ilmestynyt");
+    popup.remove("ilmestynyt");
+}
 
 
 
-function siirryGoogle() {
-    //otetaan input kentän tekstin arvo talteen
+function App() {
+
     let syote = document.getElementById("teksti").value;
-    
     //jos kirjoitettu teksti on google, suoritetaan funktio
     if (syote == "google") {
         //luodaan elementint
@@ -37,11 +41,8 @@ function siirryGoogle() {
         document.getElementById("oikea").appendChild(linkki);
         
     }
-}
 
 
-function Listaa(){
-    let syote = document.getElementById("teksti").value;
     //lista suoritettavista komennoista.
     let komennot = ["google","listaa","aaro","1 - 999 ","soita","tee popup","vaihda","funktio","uusiks"];
     //otetaan listan komennot talteen
@@ -59,20 +60,9 @@ function Listaa(){
             //klikistä suoritetaan vaihdateksti funktio.
             komennot.forEach(el => el.addEventListener("click",vaihdateksti));
             
-            }
         }
-}        
-
-//funktio joka ottaa klikatun elementin tekstin(e.target.innerhtml) talteen
-//ja vaihtaa klikatun elementin tekstin input kentän tekstiksi
-function vaihdateksti(e){
-    let tekstaa = document.getElementById("teksti");
-    tekstaa.value = e.target.innerHTML;
-
-}
-
-function lisaaKuva() {
-    let syote = document.getElementById("teksti").value;
+    }
+        
 
     //jos teksti = kuva -> toiminto alkaa luomaan elementtejä
     if (syote == "aaro") {
@@ -93,11 +83,7 @@ function lisaaKuva() {
 
 
     }
-}
 
-
-function looppaaNumero() {
-    let syote = document.getElementById("teksti").value;
 
     // jos inputtiin syottää numeron väliltä 1 - 999, loopataan numeroa niin kauan, kunnes se saavuttaa annetun(input numero) numeron
     for (i = 0; i < syote; i++) {
@@ -110,20 +96,12 @@ function looppaaNumero() {
             document.getElementById("oikea").innerHTML += "<br>" + indeksi + " " + "generoitua tekstiä" + " ";
         }
     }
-}
 
-
-function Soita() {
-    let syote = document.getElementById("teksti").value;
     let aani = new Audio("aani.mp3");
     if (syote == "soita") {
         aani.play();
     }
-}
 
-
-function popUp() {
-    let syote = document.getElementById("teksti").value;
     if (syote == "tee popup") {
         //luodaan popupikkunan elementit ja annetaan diville Id
         let span = document.createElement('span');
@@ -140,27 +118,13 @@ function popUp() {
         document.getElementById("ilmestynyt").addEventListener("click", poista);
     }
 
-}
 
-//eventlistenerin funktio joka poistaa popupin
-function poista() {
-    var popup = document.getElementById("ilmestynyt");
-    popup.remove("ilmestynyt");
-}
-
-
-function vaihda() {
-    let syote = document.getElementById("teksti").value;
     if (syote == "vaihda") {
         //jos inputkenttään syöttää vaihda -> vaihdetaan body elementin tausta
         document.body.style.background = "#4158D0";
         document.body.style.background = "linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)";
     }
-}
 
-//funktio joka luo uuden inputkentän ja napin
-function funktio() {
-    let syote = document.getElementById("teksti").value;
     if (syote == "funktio") {
         //kun funktio on kutsuttu se luo elementit
         console.log("Funktio toimii");
