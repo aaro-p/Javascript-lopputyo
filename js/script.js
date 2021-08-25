@@ -2,6 +2,22 @@
 //aina kun nappia painaa se suorittaa tekstin perusteella tarvittavan toiminnon
 //body elementissä on onclick event attribuutti joka suorittaa napin klikkauksen aina kun painetaan enter näppäintä.
 
+let syote = document.getElementById("teksti").value;
+
+
+document.querySelector('input').addEventListener('click', () =>{ 
+
+});
+
+document.addEventListener('keyup', (evt) =>{
+    if (evt.code == 'enter'){
+
+    }
+});
+
+
+
+
 function siirryGoogle() {
     //otetaan input kentän tekstin arvo talteen
     let syote = document.getElementById("teksti").value;
