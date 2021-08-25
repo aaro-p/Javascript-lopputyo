@@ -21,6 +21,33 @@ const poista = () => {
     popup.remove("ilmestynyt");
 }
 
+const napinehdot = () => {
+    let funktioSyote = document.getElementById("inputti").value;
+    switch(funktioSyote){
+        case '""':
+            console.log("anna komento");
+            break;
+        case "reload":
+            location.reload();
+            break;
+        default:
+            console.log("Kirjoitit: " + funktioSyote); 
+    }
+    //jos input palkki on tyhjä -> tulostetaan konsoliin "anna komento"
+    /*if (funktioSyote == "") {
+        console.log("anna komento")
+    }
+    //jos annetaan reload komento -> sivu latautuu uudestaan.
+    else if (funktioSyote == "reload") {
+        location.reload();
+    }
+    //jos teksti on mitä vaan muuta niin annettu teskti tulostetaan konsoliin.
+    else {
+        console.log("Kirjoitit: " + funktioSyote);
+    }
+    */
+}
+
 
 
 function App() {
@@ -146,21 +173,7 @@ function App() {
 }
 
 //funktio joka tarkastaa "FUNKTIO" elementin tekstin ja toimii annettujen ehtojen mukaisesti
-function napinehdot() {
-    let funktioSyote = document.getElementById("inputti").value;
-    //jos input palkki on tyhjä -> tulostetaan konsoliin "anna komento"
-    if (funktioSyote == "") {
-        console.log("anna komento")
-    }
-    //jos annetaan reload komento -> sivu latautuu uudestaan.
-    else if (funktioSyote == "reload") {
-        location.reload();
-    }
-    //jos teksti on mitä vaan muuta niin annettu teskti tulostetaan konsoliin.
-    else {
-        console.log("Kirjoitit: " + funktioSyote);
-    }
-}
+
 
 //funktio joka tarkistaa yläpalkin input kentästä tekstin
 function tarkistakomennot() {
