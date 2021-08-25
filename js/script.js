@@ -1,207 +1,178 @@
 
-document.querySelector('input').addEventListener('click', () =>{ 
-
+document.querySelector('#nappi').addEventListener('click', () => {
+    App()
 });
 
-document.addEventListener('keyup', (evt) =>{
-    if (evt.code == 'enter'){
-
+document.addEventListener('keyup', (evt) => {
+    if (evt.code == 'Enter') {
+        App()
     }
 });
 
-const vaihdateksti = (e) => {
-    let tekstaa = document.getElementById("teksti");
-    tekstaa.value = e.target.innerHTML;
+//vaihtaa listalta klikatun tekstin input kenttään
+const changeText = (e) => {
+    let getTextval = document.getElementById("teksti");
+    getTextval.value = e.target.innerHTML;
 
 };
 
-//eventlistenerin funktio joka poistaa popupin
-const poista = () => {
+//poistaa popup elementin
+const removePopup = () => {
     let popup = document.getElementById("ilmestynyt");
     popup.remove("ilmestynyt");
 }
 
-const napinehdot = () => {
-    let funktioSyote = document.getElementById("inputti").value;
-    switch(funktioSyote){
-        case '""':
+//suorittaa funkio elementin toiminnot napista
+const fbutton = () => {
+    let functionInput = document.getElementById("fInput").value;
+    switch (functionInput) {
+        case '':
             console.log("anna komento");
             break;
         case "reload":
             location.reload();
             break;
         default:
-            console.log("Kirjoitit: " + funktioSyote); 
+            console.log("Kirjoitit: " + functionInput);
     }
-    //jos input palkki on tyhjä -> tulostetaan konsoliin "anna komento"
-    /*if (funktioSyote == "") {
-        console.log("anna komento")
-    }
-    //jos annetaan reload komento -> sivu latautuu uudestaan.
-    else if (funktioSyote == "reload") {
-        location.reload();
-    }
-    //jos teksti on mitä vaan muuta niin annettu teskti tulostetaan konsoliin.
-    else {
-        console.log("Kirjoitit: " + funktioSyote);
-    }
-    */
+
 }
 
 
-
+//suorittaa sovelluksen toiminnot
 function App() {
 
-    let syote = document.getElementById("teksti").value;
-    //jos kirjoitettu teksti on google, suoritetaan funktio
-    if (syote == "google") {
-        //luodaan elementint
+    let input = document.getElementById("teksti").value;
+    let commands = ["google", "listaa", "aaro", "1 - 999 ", "soita", "tee popup", "vaihda", "funktio", "uusiks"];
+    if (input == "google") {
 
-        let linkki = document.createElement("a");
-        linkki.textContent = "Avaa Google"
-        linkki.target = "_blank"
-        linkki.href = ("https://www.google.fi");
-        const siirry = ("Siirrytäänkö googleen?" + "<br>");
+        let link = document.createElement("a");
+        link.textContent = "Avaa Google"
+        link.target = "_blank"
+        link.href = ("https://www.google.fi");
+        let goToGoogle = ("Siirrytäänkö googleen?" + "<br>");
 
-        //lopuksi sijoitetetaan elementit
-        document.getElementById("oikea").innerHTML = "<br>" + siirry + "<br>";
-        document.getElementById("oikea").appendChild(linkki);
-        
+        document.getElementById("oikea").innerHTML = "<br>" + goToGoogle + "<br>";
+        document.getElementById("oikea").appendChild(link);
+
     }
 
 
-    //lista suoritettavista komennoista.
-    let komennot = ["google","listaa","aaro","1 - 999 ","soita","tee popup","vaihda","funktio","uusiks"];
-    //otetaan listan komennot talteen
-    let arvot = komennot.values();
-    if (syote == "listaa"){
-        document.getElementById("vasen").innerHTML = "<br>"+"KOMENNOT: ";
-        //tehdään looppi,joka käy arvot-muuttujan alkiot läpi
-        for (let i of arvot){
-            //listataan arvot vasempaan kolumniin.
-           document.getElementById("vasen").innerHTML += ("<p>"+ i +"</>");
-           
-           //valitaan query selectorilla kaikki p elementit
-            const komennot = document.querySelectorAll("p"); 
+    let commandValues = commands.values();
+    if (input == "listaa") {
+        document.getElementById("vasen").innerHTML = "<br>" + "komennot: ";
+        //tehdään looppi,joka käy commandValues-muuttujan alkiot läpi
+        for (let i of commandValues) {
+            //listataan commandValues vasempaan kolumniin.
+            document.getElementById("vasen").innerHTML += ("<p>" + i + "</>");
+
+            //valitaan query selectorilla kaikki p elementit
+            const commands = document.querySelectorAll("p");
             //loopataan forEach loopilla kaikille p elementeille eventlistener joka kuuntelee klikkiä
-            //klikistä suoritetaan vaihdateksti funktio.
-            komennot.forEach(el => el.addEventListener("click",vaihdateksti));
-            
+            //klikistä suoritetaan changeText funktio.
+            commands.forEach(el => el.addEventListener("click", changeText));
+
         }
     }
-        
 
-    //jos teksti = kuva -> toiminto alkaa luomaan elementtejä
-    if (syote == "aaro") {
 
-        //luodaan kuva elemenetti
-        let kuva = document.createElement("img");
+    //jos teksti = img -> toiminto alkaa luomaan elementtejä
+    if (input == "aaro") {
 
-        //annetetaan kuva elementille kuvan lähde
-        kuva.src = "./img/lisattavakuva.jpg"
+        //luodaan img elemenetti
+        let img = document.createElement("img");
 
-        //annetaan kuvalle id
-        kuva.id = "kuva"
+        //annetetaan img elementille imgn lähde
+        img.src = "./img/lisattavakuva.jpg"
 
-        //lisätään kuva oikeaan kolumniin
+        //annetaan imglle id
+        img.id = "img"
+
+        //lisätään img oikeaan kolumniin
         document.getElementById("oikea").innerHTML = "<br>"
-        document.getElementById("oikea").appendChild(kuva);
-        document.getElementById("kuva").style.borderRadius = "10px";
+        document.getElementById("oikea").appendChild(img);
+        document.getElementById("img").style.borderRadius = "10px";
 
 
     }
 
 
-    // jos inputtiin syottää numeron väliltä 1 - 999, loopataan numeroa niin kauan, kunnes se saavuttaa annetun(input numero) numeron
-    for (i = 0; i < syote; i++) {
-        if (syote >= 1 && syote <= 999) {
+    // jos fInputin syottää numeron väliltä 1 - 999, loopataan numeroa niin kauan, kunnes se saavuttaa annetun(input numero) numeron
+    for (i = 0; i < input; i++) {
+        if (input >= 1 && input <= 999) {
 
             //otetaan talteen loopatut numerot
-            let indeksi = (i + 1);
+            let index = (i + 1);
 
-            //tulostetaan loopin indeksin arvo ja perään teksti: generoitua tekstiä
-            document.getElementById("oikea").innerHTML += "<br>" + indeksi + " " + "generoitua tekstiä" + " ";
+            //tulostetaan loopin indexn arvo ja perään teksti: generoitua tekstiä
+            document.getElementById("oikea").innerHTML += "<br>" + index + " " + "generoitua tekstiä" + " ";
         }
     }
 
-    let aani = new Audio("aani.mp3");
-    if (syote == "soita") {
-        aani.play();
+    let audio = new Audio("audio.mp3");
+    if (input == "soita") {
+        audio.play();
     }
 
-    if (syote == "tee popup") {
-        //luodaan popupikkunan elementit ja annetaan diville Id
+    if (input == "tee popup") {
+        //luodaan popupikkunan elementit ja annetaan divlle Id
         let span = document.createElement('span');
-        let divi = document.createElement('div');
-        divi.id = "ilmestynyt";
-        //annetaan ilmestyvälle diville teksti.
-        divi.innerHTML = "Tässä" + " " + '<b>pyydetty</b>' + " " + "popup";
-        divi.appendChild(span);
+        let div = document.createElement('div');
+        div.id = "ilmestynyt";
+        //annetaan ilmestyvälle divlle teksti.
+        div.innerHTML = "Tässä" + " " + '<b>pyydetty</b>' + " " + "popup";
+        div.appendChild(span);
         span.innerHTML = "✖"
-        //lisätään luotu popup elementti oikeaan kolumniin
+        //lisätään luotu popup falseCommand oikeaan kolumniin
         document.getElementById("oikea").innerHTML = "";
-        document.getElementById("oikea").appendChild(divi);
-        //luodaan eventlistener -> jos popup ikkunaa klikkaa se suorittaa funktion joka poistaa popup elementin
-        document.getElementById("ilmestynyt").addEventListener("click", poista);
+        document.getElementById("oikea").appendChild(div);
+        //luodaan eventlistener -> jos popup ikkunaa klikkaa se suorittaa funktion joka removePopupa popup elementin
+        document.getElementById("ilmestynyt").addEventListener("click", removePopup);
     }
 
 
-    if (syote == "vaihda") {
+    if (input == "vaihda") {
         //jos inputkenttään syöttää vaihda -> vaihdetaan body elementin tausta
         document.body.style.background = "#4158D0";
         document.body.style.background = "linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)";
     }
 
-    if (syote == "funktio") {
+    if (input == "funktio") {
         //kun funktio on kutsuttu se luo elementit
         console.log("Funktio toimii");
         let container = document.createElement("div");
         container.id = "container"
-        let inputti = document.createElement("input");
-        inputti.id = "inputti";
-        let suorita = document.createElement("button");
-        suorita.id = "suorita";
-        suorita.innerHTML = "Suorita"
-        container.append(inputti,suorita);
+        let fInput = document.createElement("input");
+        fInput.id = "inputti";
+        let execute = document.createElement("button");
+        execute.id = "suorita";
+        execute.innerHTML = "suorita"
+        container.append(fInput, execute);
         document.getElementById("oikea").innerHTML = ""
         document.getElementById("oikea").appendChild(container);
-        //eventlistener joka suorittaa napilla komentojen tarkistuksen ja suorittaa annetut komennot
-        document.getElementById("suorita").addEventListener("click", napinehdot);
+        //eventlistener joka suorittaa napilla komentojen tarkistuksen ja suorittaa annetut commands
+        document.getElementById("suorita").addEventListener("click", fbutton);
 
 
     }
-}
 
-//funktio joka tarkastaa "FUNKTIO" elementin tekstin ja toimii annettujen ehtojen mukaisesti
-
-
-//funktio joka tarkistaa yläpalkin input kentästä tekstin
-function tarkistakomennot() {
-    let syote = document.getElementById("teksti").value;
-    // tekstit jotka hyväkystään komennoiksi -> ei ilmoiteta virheellisestä komennosta
-    let komennot = ["google", "listaa", "aaro", "soita", "tee popup", "vaihda", "funktio", "uusiks", ""];
     //tarkastaja joka tarkastaa tekstin arvon
-    let tarkista = komennot.includes(syote);
-    //jos input kentässä on numerot -> tarkista = true(oikea komento)
-    if (syote >= 1 && syote <= 999) {
-        tarkista = true;
+    let verifyInput = commands.includes(input);
+    //jos input kentässä on numerot 1-999 -> verifyInput = true
+    if (input >= 1 && input <= 999) {
+        verifyInput = true;
     }
-    //jos tarkisa ei sisällä oikeaa komentoa -> tarkistaja false 
-    if (tarkista == false) {
-        //kun tarkistaja on false luodaan "komentoa ei tunnistettu" teksti ja sijoitetaan se kolumniin.
-        let elementti = document.createElement("p");
-        elementti.innerHTML = "komentoa ei tunnistettu";
+    //jos input ei ole komento listassa -> verifyInput = false 
+    if (verifyInput == false) {
+        //kun verifyInput on false luodaan "komentoa ei tunnistettu" teksti ja sijoitetaan se kolumniin.
+        let falseCommand = document.createElement("p");
+        falseCommand.innerHTML = "komentoa ei tunnistettu";
 
-        //document.getElementById("oikea").innerHTML = ""
-        document.getElementById("oikea").appendChild(elementti);
+        document.getElementById("oikea").appendChild(falseCommand);
 
     }
-}
 
-//sivu latautuu uusiksi 
-function uusiks() {
-    let syote = document.getElementById("teksti").value;
-    if (syote == "uusiks") {
+    if (input == "uusiks") {
         location.reload();
     }
 }
