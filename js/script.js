@@ -23,7 +23,7 @@ const removePopup = () => {
 
 //suorittaa funkio elementin toiminnot napista
 const fbutton = () => {
-    let functionInput = document.getElementById("fInput").value;
+    let functionInput = document.getElementById("inputti").value;
     switch (functionInput) {
         case '':
             console.log("anna komento");
