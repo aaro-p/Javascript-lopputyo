@@ -1,4 +1,4 @@
-# Javascript-lopptyo
+# Javascript-lopputyo
 
 Satakunnan Ammattikorkeakoulu -
 Javascript ohjelmointikurssin lopputyö
